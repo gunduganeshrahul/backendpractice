@@ -1,0 +1,52 @@
+const{Model,DataTypes}=require('sequelize')
+module.exports=(sequelize)=>
+{
+    class Employee extends Model{}
+    Employee.init(
+        {
+            EmployeeID:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:false,
+                primaryKey:true,
+                autoIncrement:true,
+            },
+            EmployeeName:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Designation:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Department:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Salary:
+            {
+                type:DataTypes.DECIMAL,
+                allowNull:false,
+            },
+            JoiningDate:
+            {
+                type:DataTypes.DATEONLY,
+            },
+            IsActive:
+            {
+                type:DataTypes.BOOLEAN,
+                defaultValue:true,
+            },
+        },
+        {
+            sequelize,
+            modelName:'Employee',
+            tableName:"Employee",
+            timestamps:false,
+        },
+    );
+    return Employee;
+}

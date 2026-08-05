@@ -1,0 +1,52 @@
+const {Model,DataTypes}=require('sequelize')
+module.exports=sequelize=>
+{
+    class Vehicle extends Model{};
+    Vehicle.init(
+        {
+            VehicleID:
+            {
+                type:DataTypes.INTEGER,
+                autoIncrement:true,
+                primaryKey:true,
+                allowNull:false,
+            },
+            VehicleName:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Model:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            RegistrationNumber:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            FuelType:
+            {
+                type:DataTypes.STRING,
+            },
+            Price:
+            {
+                type:DataTypes.DECIMAL,
+                allowNull:false,
+            },
+            IsActive:
+            {
+                type:DataTypes.BOOLEAN,
+                defaultValue:true,
+            },
+        },
+        {
+            sequelize,
+            modelName:"Vehicle",
+            tableName:"Vehicle",
+            timestamps:false,
+        },
+    );
+    return Vehicle;
+}
