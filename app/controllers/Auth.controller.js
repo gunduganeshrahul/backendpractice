@@ -14,8 +14,7 @@ exports.register=async(req,res)=>
             return res.status(400).json({success:false,message:"required fields"});
         }
         // email verification is ther or not 
-        const existing =await User.findO
-        ne({where:{Email}});
+        const existing =await User.findOne({where:{Email}});
         if(existing)
         {
             return res.status(409).json({success:false,message:"email already register"});
@@ -48,7 +47,7 @@ exports.register=async(req,res)=>
 };
 
 
-    exports.login=async(req,res)=>
+exports.login=async(req,res)=>
     {
         try
         {
@@ -71,7 +70,8 @@ exports.register=async(req,res)=>
 
             const token=jwt.sign(
                 {
-                    UserID:user.UserID,Email:user.Email
+                    UserID:user.UserID,
+                    Email:user.Email
                 },
                 process.env.JWT_SECRET,
                 {expiresIn:"48h"}

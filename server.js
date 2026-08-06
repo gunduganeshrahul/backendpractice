@@ -31,6 +31,8 @@ require('./app/routes/Vehicle.route.js')(app);
 require('./app/routes/Auth.route.js')(app);
 //
 require('./app/routes/Authreg.route.js')(app);
+//
+require('./app/routes/CustomerAUTH.route.js')(app);
 app.get('/',(req,res)=>
 {
 res.json({message:"surver is running."});
