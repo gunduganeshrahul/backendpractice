@@ -25,4 +25,5 @@ db.product=require("../models/Product.model.js")(sequelize);
  db.vehicle=require("./Vehicle.model.js")(sequelize);
 db.user=require('./User.modal.js')(sequelize);
 db.reguser=require('./Studentreg.moedl.js')(sequelize);
+db.customer=require('./CustomerAUTH.model.js')(sequelize);
 module.exports=db
