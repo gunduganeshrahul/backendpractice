@@ -1,0 +1,53 @@
+const {Model,DataTypes}=require("sequelize");
+module.exports=(sequelize)=>
+{
+    class Invoice extends Model{}
+    Invoice.init(
+        {
+            InvoiceID:
+            {
+                type:DataTypes.INTEGER,
+                primaryKey:true,
+                allowNull:false,
+                autoIncrement:true,
+            },
+            InvoiceNumber:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+                unique:true,
+            },
+            CustomerName:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Amount:
+            {
+                type:DataTypes.DECIMAL,
+                allowNull:false,
+            },
+            Status:
+            {
+                type:DataTypes.STRING,
+            defaultValue:"pending",
+            },
+            DueDate:
+            {
+                type:DataTypes.DATEONLY,
+            },
+            IsActive:
+            {
+                type:DataTypes.BOOLEAN,
+                defaultValue:true,
+            },
+        },
+        {
+            sequelize,
+            modelName:"Invoice",
+            tableName:"Invoice",
+            timestamps:"false",
+        },
+    );
+    return Invoice;
+};
