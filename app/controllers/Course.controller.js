@@ -3,9 +3,11 @@ const Course=db.course;
 
 exports.create=async(req,res)=>
 {
+    console.log('hjghgjhgjg')
     try
     {
 const{CourseName,Duration,Fee,Instructor}=req.body;
+console.log(req.body,"............1");
 if(!CourseName)
 {
     return res.status(400).json({success:false,message:"required field"});
@@ -20,6 +22,7 @@ if(!Fee)
 }
 
 const details=await Course.create({CourseName,Duration,Fee,Instructor});
+console.log(details,".................2");
 return res.status(201).json({success:true,message:"created successfully",data:details});
 
 }
