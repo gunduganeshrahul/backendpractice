@@ -27,4 +27,5 @@ db.user=require('./User.modal.js')(sequelize);
 db.reguser=require('./Studentreg.moedl.js')(sequelize);
 db.customer=require('./CustomerAUTH.model.js')(sequelize);
 db.invoice=require('./Invoice.model.js')(sequelize);
+db.admin=require('../models/AdminRegister.model.js')(sequelize);
 module.exports=db

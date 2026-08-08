@@ -35,6 +35,9 @@ require('./app/routes/Authreg.route.js')(app);
 require('./app/routes/CustomerAUTH.route.js')(app);
 //
 require('./app/routes/Invoice.route.js')(app);
+//
+re
+require("./app/routes/AdminRegister.route.js")(app);
 app.get('/',(req,res)=>
 {
 res.json({message:"surver is running."});
