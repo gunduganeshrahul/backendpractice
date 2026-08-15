@@ -28,4 +28,14 @@ db.reguser=require('./Studentreg.moedl.js')(sequelize);
 db.customer=require('./CustomerAUTH.model.js')(sequelize);
 db.invoice=require('./Invoice.model.js')(sequelize);
 db.admin=require('../models/AdminRegister.model.js')(sequelize);
-module.exports=db
+db.gym=require('../models/Gym.model.js')(sequelize);
+db.trainer=require('../models/Trainer.model.js')(sequelize);
+db.gym.belongsTo(db.trainer,{foreignKey:"TrainerID", as:"AssignedTrainer"});
+db.trainer.hasMany(db.gym,{foreignKey:"TrainerID",as:"Members"})
+
+ db.loginreg=require('../models/loginregister.model.js')(sequelize);
+
+db.vendor=require('../models/Vendor.model.js')(sequelize);
+
+module.exports=db;
+ 

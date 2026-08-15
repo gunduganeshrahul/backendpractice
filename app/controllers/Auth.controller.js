@@ -73,7 +73,7 @@ exports.login=async(req,res)=>
                     UserID:user.UserID,
                     Email:user.Email
                 },
-                process.env.JWT_SECRET,
+                process.env. JWT_SECRET,
                 {expiresIn:"48h"}
             );
             return res.status(200).json({success:true,message:"login successfully",token,
@@ -90,7 +90,9 @@ exports.login=async(req,res)=>
         {
             return res.status(500).json({success:false,message:e.message});
         }
-    };
+    }; 
+
+    
 
 
 

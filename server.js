@@ -39,6 +39,14 @@ require('./app/routes/CustomerAUTH.route.js')(app);
 require('./app/routes/Invoice.route.js')(app);
 //
 require("./app/routes/AdminRegister.route.js")(app);
+//
+require('./app/routes/Gym.routes.js')(app);
+//
+require('./app/routes/Trainer.routes.js')(app);
+//
+require('./app/routes/loginregister.route.js')(app);
+//
+require('./app/routes/Vendor.route.js')(app);
 app.get('/',(req,res)=>
 {
 res.json({message:"surver is running."});

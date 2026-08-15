@@ -1,0 +1,61 @@
+const {Model,DataTypes}=require("sequelize")
+module.exports=(sequelize)=>
+{
+    class Gym extends Model{}
+    Gym.init(
+        {
+            MemberID:
+            {
+                type:DataTypes.INTEGER,
+                autoIncrement:true,
+                primaryKey:true,
+                allowNull:false,
+            },
+            TrainerID:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:true,
+                references:{
+                    model:"Trainer",
+                    key:"TrainerID",
+                },
+            },
+            MemberName:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Age:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:false,
+            },
+            MembershipType:
+            {
+                type:DataTypes.ENUM("basic","premium"),
+                allowNull:true,
+            },
+            FeeAmount:
+            {
+                type:DataTypes.DECIMAL,
+                allowNull:false,
+            },
+             JoinDate:
+             {
+                type:DataTypes.DATEONLY,
+             },
+             IsActive:
+             {
+                type:DataTypes.BOOLEAN,
+                defaultValue:true,
+             },
+        },
+        {
+            sequelize,
+            modelName:"Gym",
+            tableName:"Gym",
+            timestamps:false,
+        },
+    );
+    return Gym;
+};
