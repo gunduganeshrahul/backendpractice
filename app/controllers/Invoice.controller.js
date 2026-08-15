@@ -19,10 +19,10 @@ exports.create=async(req,res)=>
         });
          if(existedInvoice)
         {
-            return res.status(409).json({success:"false",message:"InvoiceNumber already existed "});
+            return res.status(409).json({success:false,message:"InvoiceNumber already existed "});
         }
         const details=await Invoice.create({InvoiceNumber,CustomerName,Amount});
-        return res.status(201).json({success:true,message:"created success fully"});
+        return res.status(201).json({success:true,message:"created success fully",data:details});
     }
     catch(e)
     {
@@ -109,7 +109,7 @@ exports.update=async(req,res)=>
 };
 
 
-exports.revome=async(req,res)=>
+exports.remove=async(req,res)=>
 {
     try
     {

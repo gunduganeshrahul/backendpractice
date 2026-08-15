@@ -46,7 +46,7 @@ module.exports=(sequelize)=>
             sequelize,
             modelName:"Invoice",
             tableName:"Invoice",
-            timestamps:"false",
+            timestamps:false,
         },
     );
     return Invoice;

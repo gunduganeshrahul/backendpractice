@@ -2,6 +2,8 @@ const express=require('express');
 const app=express();
 app.use(express.json());
 const db=require('./app/models');
+const cors = require("cors");
+app.use(cors());
 
 db.sequelize
 .authenticate()
@@ -36,7 +38,6 @@ require('./app/routes/CustomerAUTH.route.js')(app);
 //
 require('./app/routes/Invoice.route.js')(app);
 //
-re
 require("./app/routes/AdminRegister.route.js")(app);
 app.get('/',(req,res)=>
 {
