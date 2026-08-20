@@ -47,6 +47,10 @@ require('./app/routes/Trainer.routes.js')(app);
 require('./app/routes/loginregister.route.js')(app);
 //
 require('./app/routes/Vendor.route.js')(app);
+//
+require('./app/routes/Service.routes.js')(app);
+//
+require('./app/routes/Staff.routes.js')(app);
 app.get('/',(req,res)=>
 {
 res.json({message:"surver is running."});

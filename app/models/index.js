@@ -33,9 +33,29 @@ db.trainer=require('../models/Trainer.model.js')(sequelize);
 db.gym.belongsTo(db.trainer,{foreignKey:"TrainerID", as:"AssignedTrainer"});
 db.trainer.hasMany(db.gym,{foreignKey:"TrainerID",as:"Members"})
 
- db.loginreg=require('../models/loginregister.model.js')(sequelize);
-
+db.loginreg=require('../models/loginregister.model.js')(sequelize);
 db.vendor=require('../models/Vendor.model.js')(sequelize);
 
+db.service=require('../models/Service.model.js')(sequelize);
+db.staff=require('../models/Staff.model.js')(sequelize);
+
+db.service.belongsTo(db.staff,{
+    foreignKey:"StaffID",
+    as:"AssignedStaff"
+});
+db.staff.hasMany(db.service,{
+    foreignKey:"StaffID",
+    as:"Services"
+});
+
+db.service.belongsTo(db.staff,{
+    foreignKey:"StaffID",
+    as:"AssignedStaff",
+});
+
+db.staff.hasMany(db.service,{
+    foreignKey:"StaffID",
+    as:"servies",
+});
 module.exports=db;
  
