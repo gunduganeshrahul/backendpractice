@@ -153,6 +153,7 @@ exports.getMyProfile = async (req, res) => {
 
         return res.status(200).json({
             success: true,
+            message: "Profile fetched successfully",
             data: details
         });
 
@@ -163,7 +164,6 @@ exports.getMyProfile = async (req, res) => {
         });
     }
 };
-
 
 
 exports.updateMyProfile = async (req, res) => {
@@ -182,19 +182,19 @@ exports.updateMyProfile = async (req, res) => {
 
         const update = {};
 
-        if (req.body.DoctorName) {
+        if (req.body.DoctorName !== undefined) {
             update.DoctorName = req.body.DoctorName;
         }
 
-        if (req.body.Specialization) {
+        if (req.body.Specialization !== undefined) {
             update.Specialization = req.body.Specialization;
         }
 
-        if (req.body.Email) {
+        if (req.body.Email !== undefined) {
             update.Email = req.body.Email;
         }
 
-        if (req.body.Password) {
+        if (req.body.Password !== undefined) {
             update.Password = await bcrypt.hash(
                 req.body.Password,
                 10

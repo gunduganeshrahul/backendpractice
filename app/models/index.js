@@ -96,5 +96,16 @@ db.course.hasMany(db.studentinformation,
     as:"StudentInformation",
   }
 );
+db.feedback=require('../models/Feedback.model.js')(sequelize);
+
+db.feedback.belongsTo(db.doctor,
+  {
+    foreignKey:"DoctorID",
+  },
+);
+db.doctor.hasMany(db.feedback,{
+  foreignKey:"DoctorID",
+});
+
 
 module.exports = db;

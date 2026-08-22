@@ -55,6 +55,8 @@ require('./app/routes/Staff.routes.js')(app);
 require('./app/routes/Patient.route.js')(app);
 //
 require('./app/routes/Doctor.route.js')(app);
+//
+require('./app/routes/Feedback.route.js')(app);
 app.get('/',(req,res)=>
 {
 res.json({message:"surver is running."});
