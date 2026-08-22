@@ -11,6 +11,16 @@ module.exports=(sequelize)=>
                 allowNull:false,
                 autoIncrement:true,
             },
+             BookID:
+             {
+                type:DataTypes.INTEGER,
+                
+                references:
+                {
+                    model:"Library",
+                    key:"BookID",
+                }
+             },
             InvoiceNumber:
             {
                 type:DataTypes.STRING,

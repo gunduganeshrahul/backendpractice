@@ -11,6 +11,15 @@
                 autoIncrement:true,
                 allowNull:false,
             },
+            CourseID:
+            {
+                type:DataTypes.INTEGER,
+                references:
+                {
+                    model:"Course",
+                    key:"CourseID",
+                },
+            },
             Name:
             {
                 type:DataTypes.STRING,

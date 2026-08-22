@@ -1,12 +1,13 @@
 const { where } = require('sequelize');
 const db=require('../models');
 const Invoice=db.invoice;
+const Library=db.library;
 
 exports.create=async(req,res)=>
 {
     try
     {
-        const {InvoiceNumber,CustomerName,Amount}=req.body;
+        const {InvoiceNumber,CustomerName,Amount,BookID}=req.body;
 
         if(!InvoiceNumber||!CustomerName||!Amount)
         {
@@ -21,7 +22,7 @@ exports.create=async(req,res)=>
         {
             return res.status(409).json({success:false,message:"InvoiceNumber already existed "});
         }
-        const details=await Invoice.create({InvoiceNumber,CustomerName,Amount});
+        const details=await Invoice.create({InvoiceNumber,CustomerName,Amount,BookID});
         return res.status(201).json({success:true,message:"created success fully",data:details});
     }
     catch(e)
@@ -31,57 +32,106 @@ exports.create=async(req,res)=>
 };
 
 
-exports.getAll=async(req,res)=>
-{
-    try
-    {
-        const {InvoiceNumber,CustomerName,Amount,Status, DueDate,IsActive,sortBy,order,limit,page}=req.query;
-        const where={};
-        if(InvoiceNumber) where.InvoiceNumber=InvoiceNumber;
-        if(CustomerName) where.CustomerName=CustomerName;
-        if(Amount)where.Amount=Amount;
-        if(Status) where.Status=Status;
-        if(DueDate) where.DueDate=DueDate;
-        if(IsActive !==undefined) where.IsActive=IsActive==="true";
+ exports.getAll = async (req, res) => {
+  try {
+    const {
+      InvoiceNumber,
+      CustomerName,
+      Amount,
+      Status,
+      DueDate,
+      IsActive,
+      sortBy,
+      order,
+      limit,
+      page,
+    } = req.query;
 
-        const options={where,
-            order:[[sortBy ||"InvoiceID",order==="desc"?"DESC":"ASC"]],
-        };
-        if(page&&limit)
+    const where = {};
+
+    if (InvoiceNumber) where.InvoiceNumber = InvoiceNumber;
+    if (CustomerName) where.CustomerName = CustomerName;
+    if (Amount) where.Amount = Amount;
+    if (Status) where.Status = Status;
+    if (DueDate) where.DueDate = DueDate;
+
+    if (IsActive !== undefined) {
+      where.IsActive = IsActive === "true";
+    }
+
+    const options = {
+      where,
+
+      order: [
+        [
+          sortBy || "InvoiceID",
+          order === "desc" ? "DESC" : "ASC",
+        ],
+      ],
+
+      include: [
         {
-        const pageNum=parseInt(page);
-        const limitNum=parseInt(limit);
-        options.limit=limitNum;
-        options.offset=(pageNum-1)*limitNum;
-        }
-        const details=await Invoice.findAll(options);
+          model: Library,
+          as: "AssignedBook",
+        },
+      ],
+    };
 
-        return res.status(200).json({success:"true",count:details.length,data:details});
+    if (page && limit) {
+      const pageNum = parseInt(page);
+      const limitNum = parseInt(limit);
+
+      options.limit = limitNum;
+      options.offset = (pageNum - 1) * limitNum;
     }
-    catch(e)
-    {
-        return res.status(500).json({success:false,message:e.message});
-    }
+
+    const details = await Invoice.findAll(options);
+
+    return res.status(200).json({
+      success: true,
+      count: details.length,
+      data: details,
+    });
+
+  } catch (e) {
+    return res.status(500).json({
+      success: false,
+      message: e.message,
+    });
+  }
 };
 
-exports.getById=async(req,res)=>
-{
-    try
-    {
-        const details=await Invoice.findByPk(req.params.id);
-        if(!details)
+ exports.getById = async (req, res) => {
+  try {
+    const details = await Invoice.findByPk(req.params.id, {
+      include: [
         {
-            return res.status(404).json({success:false,message:"not found"});
-        }
-        
-        return res.status(200).json({success:true,message:"details found",data:details});
-    }
-    catch(e)
-    {
-        return res.status(500).json({success:false,message:e.message});
-    }
-};
+          model: Library,
+          as: "AssignedBook",
+        },
+      ],
+    });
 
+    if (!details) {
+      return res.status(404).json({
+        success: false,
+        message: "Not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Details found",
+      data: details,
+    });
+
+  } catch (e) {
+    return res.status(500).json({
+      success: false,
+      message: e.message,
+    });
+  }
+};
 
 exports.update=async(req,res)=>
 {
@@ -98,6 +148,7 @@ exports.update=async(req,res)=>
         if(req.body.Status) updates.Status=req.body.Status;
         if(req.body.DueDate) updates.DueDate=req.body.DueDate;
         if(req.body.IsActive !==undefined) updates.IsActive=req.body.IsActive;
+        if(req.body.BookID !==undefined) updates.BookID=req.body.BookID;
 
         await details.update(updates);
         return res.status(200).json({success:true,message:"updated successfully",data:details});

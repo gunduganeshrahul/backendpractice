@@ -3,7 +3,7 @@ const Course=db.course;
 
 exports.create=async(req,res)=>
 {
-    console.log('hjghgjhgjg')
+    
     try
     {
 const{CourseName,Duration,Fee,Instructor}=req.body;
