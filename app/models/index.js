@@ -107,5 +107,7 @@ db.doctor.hasMany(db.feedback,{
   foreignKey:"DoctorID",
 });
 
+db.registerFE=require('../models/Registration.model.js')(sequelize);
+
 
 module.exports = db;
