@@ -59,12 +59,14 @@ require('./app/routes/Doctor.route.js')(app);
 require('./app/routes/Feedback.route.js')(app);
 //
 require('./app/routes/Registration.route.js')(app);
+//
+require('./app/routes/Automotiveindustry.route.js')(app);
 app.get('/',(req,res)=>
 {
 res.json({message:"surver is running."});
 });
 
-const PORT=process.env.PORT || 3000;
+const PORT=process.env.PORT || 8080;
 app.listen(PORT,()=>
 {
     console.log(`server running on port ${PORT}`);

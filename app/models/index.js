@@ -108,6 +108,7 @@ db.doctor.hasMany(db.feedback,{
 });
 
 db.registerFE=require('../models/Registration.model.js')(sequelize);
+db.customermaster=require('../models/AutomotiveIndustry.js')(sequelize);
 
 
 module.exports = db;
