@@ -61,6 +61,10 @@ require('./app/routes/Feedback.route.js')(app);
 require('./app/routes/Registration.route.js')(app);
 //
 require('./app/routes/Automotiveindustry.route.js')(app);
+// 
+require('./app/routes/VehicleMaster.route.js')(app);
+//
+
 app.get('/',(req,res)=>
 {
 res.json({message:"surver is running."});
