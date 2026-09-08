@@ -64,6 +64,7 @@ require('./app/routes/Automotiveindustry.route.js')(app);
 // 
 require('./app/routes/VehicleMaster.route.js')(app);
 //
+require('./app/routes/LoginRegister(froend).routes.js')(app);
 
 app.get('/',(req,res)=>
 {

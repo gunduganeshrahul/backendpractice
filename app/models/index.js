@@ -111,6 +111,6 @@ db.registerFE=require('../models/Registration.model.js')(sequelize);
 db.customermaster=require('../models/AutomotiveIndustry.js')(sequelize);
 
 db.vehiclemaster=require('../models/VehicleMaster.model.js')(sequelize);
-
+db.LoginRegister=require('./LoginRegister(froend).model.js')(sequelize);
 
 module.exports = db;
