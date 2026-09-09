@@ -192,7 +192,7 @@ exports.forgotPassword = async (req, res) => {
         User.reset_token_expiry = resetTokenexpired;
         await User.save();
 
-        const resetlink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+        const resetlink = `${process.env.CLIENT_UR}/reset-password/${resetToken}`;
 
         console.log("Reset link (dev only):", resetlink);
 
@@ -202,7 +202,7 @@ exports.forgotPassword = async (req, res) => {
             subject: "ShopEase Password Reset",
             html: `
                 <p>Hello ${User.UserName},</p>
-                <p>You requested a password reset. Click the link below to reset it. This link expires in 15 minutes.</p>
+                <p>You requested a password reset. Click the link below to reset it. This link expires in 5 minutes.</p>
                 <p><a href="${resetlink}">${resetlink}</a></p>
                 <p>If you did not request this, you can safely ignore this email.</p>`
         });
