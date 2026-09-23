@@ -1,0 +1,57 @@
+const {Model,DataTypes, INTEGER}=require('sequelize');
+module.exports=(sequelize)=>
+{
+    class Service extends Model{}
+    Service.init(
+        {
+            ServiceID:
+            {
+                type:DataTypes.INTEGER,
+                primaryKey:true,
+                allowNull:false,
+                autoIncrement:true,
+            },
+             StaffID:
+            {
+                 type:DataTypes.INTEGER,
+                allowNull:false,
+                references:
+                {
+                    model:"Staff",
+                    key:"StaffID",
+                },
+            },
+            ServiceName:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Price:
+            {
+                type:DataTypes.DECIMAL,
+                allowNull:false,
+            },
+            Duration:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:false,
+            },
+            Category:
+            {
+                type:DataTypes.STRING,
+            },
+            IsActive:
+            {
+                type:DataTypes.BOOLEAN,
+                defaultValue:true,
+            },
+        },
+        {
+            sequelize,
+            modelName:"Service",
+            tableName:"Service",
+            timestamps:false,
+        },
+    );
+    return Service;
+};

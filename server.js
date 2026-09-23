@@ -2,6 +2,8 @@ const express=require('express');
 const app=express();
 app.use(express.json());
 const db=require('./app/models');
+const cors = require("cors");
+app.use(cors());
 
 db.sequelize
 .authenticate()
@@ -31,12 +33,45 @@ require('./app/routes/Vehicle.route.js')(app);
 require('./app/routes/Auth.route.js')(app);
 //
 require('./app/routes/Authreg.route.js')(app);
+//
+require('./app/routes/CustomerAUTH.route.js')(app);
+//
+require('./app/routes/Invoice.route.js')(app);
+//
+require("./app/routes/AdminRegister.route.js")(app);
+//
+require('./app/routes/Gym.routes.js')(app);
+//
+require('./app/routes/Trainer.routes.js')(app);
+//
+require('./app/routes/loginregister.route.js')(app);
+//
+require('./app/routes/Vendor.route.js')(app);
+//
+require('./app/routes/Service.routes.js')(app);
+//
+require('./app/routes/Staff.routes.js')(app);
+//
+require('./app/routes/Patient.route.js')(app);
+//
+require('./app/routes/Doctor.route.js')(app);
+//
+require('./app/routes/Feedback.route.js')(app);
+//
+require('./app/routes/Registration.route.js')(app);
+//
+require('./app/routes/Automotiveindustry.route.js')(app);
+// 
+require('./app/routes/VehicleMaster.route.js')(app);
+//
+require('./app/routes/LoginRegister(froend).routes.js')(app);
+
 app.get('/',(req,res)=>
 {
 res.json({message:"surver is running."});
 });
 
-const PORT=process.env.PORT || 3000;
+const PORT=process.env.PORT || 8080;
 app.listen(PORT,()=>
 {
     console.log(`server running on port ${PORT}`);

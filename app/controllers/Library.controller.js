@@ -31,6 +31,7 @@ exports.create=async(req,res)=>
 };
 
 exports.getAll = async (req, res) => {
+     
   try {
     const {
       Title,
@@ -44,6 +45,7 @@ exports.getAll = async (req, res) => {
       limit,
       page,
     } = req.query;
+
 
     const where = {};
 

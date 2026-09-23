@@ -1,10 +1,11 @@
 const { parse } = require('dotenv');
 const db = require('../models');
 const StudentInformation = db.studentinformation;
+const Course=db.course;
 
 exports.create = async (req, res) => {
     try {
-        const { Name, Branch, Department, College, Skill, IDNo, CGPA } = req.body;
+        const { Name, Branch, Department, College, Skill, IDNo, CGPA,CourseID} = req.body;
 
         if (!Name) {
             return res.status(400).json({ success: false, message: "required field" });
@@ -25,7 +26,7 @@ exports.create = async (req, res) => {
             return res.status(400).json({ success: false, message: "required field" });
         }
 
-        const details = await StudentInformation.create({ Name, Branch, Department, College, Skill, IDNo, CGPA });
+        const details = await StudentInformation.create({ Name, Branch, Department, College, Skill, IDNo, CGPA,CourseID});
         return res.status(201).json({ success: true, message: "created successfully", data: details });
     }
     catch (e) {
@@ -50,6 +51,18 @@ exports.getAll=async(req,res)=>
         const options={
             where,
             order:[[sortBy || "StudentInfoID",order==='desc'?"DESC":"ASC"]],
+
+            include:[
+                {
+                    model:Course,
+                    as:"AssignedCourse",
+                    attributes:
+                    {
+                   exclude:["Instructor","Fee"
+                   ]
+                    }
+                },
+            ],
         };
         if(page&&limit)
         {
@@ -69,7 +82,16 @@ exports.getAll=async(req,res)=>
 
 exports.getById = async (req, res) => {
     try {
-        const details = await StudentInformation.findByPk(req.params.id);
+        const details = await StudentInformation.findByPk(req.params.id,
+            {
+                include:[
+                    {
+                        model:Course,
+                        as:"AssignedCourse",
+                    },
+                ],
+            },
+        );
         if (!details) {
             return res.status(404).json({ success: false, message: "not found" });
         }
@@ -82,7 +104,17 @@ exports.getById = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        const details = await StudentInformation.findByPk(req.params.id);
+        const details = await StudentInformation.findByPk(req.params.id,
+            {
+                include:[
+                    {
+                        model:Course,
+                        as:"AssignedCourse",
+                        
+                    }
+                ]
+            }
+        );
         if (!details) {
             return res.status(404).json({ success: false, message: "not found" });
         }
@@ -94,6 +126,7 @@ exports.update = async (req, res) => {
         if (req.body.Skill) updates.Skill = req.body.Skill;
         if (req.body.IDNo) updates.IDNo = req.body.IDNo;
         if (req.body.CGPA) updates.CGPA = req.body.CGPA;
+        if(req.body.CourseID) updates.CourseID=req.body.CourseID;
 
         await details.update(updates);
         return res.status(200).json({ success: true, message: "updated successfully", data: details });
