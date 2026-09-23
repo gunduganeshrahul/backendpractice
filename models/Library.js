@@ -1,0 +1,52 @@
+const {Model,DataTypes}=require ("sequelize")
+module.exports=(sequelize)=>
+{
+    class library extends Model{}
+    library.init(
+        {
+            BookID:
+            {
+                type:DataTypes.INTEGER,
+                autoIncrement:true,
+                primaryKey:true,
+                allowNull:false,
+            },
+            Title:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Author:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Genre:
+            {
+                type:DataTypes.STRING,
+            },
+            Price:
+            {
+                type:DataTypes.DECIMAL,
+                allowNull:false,
+            },
+            Stock:
+            {
+                type:DataTypes.INTEGER,
+                defaultValue:0,
+            },
+            IsActive:
+            {
+                type:DataTypes.BOOLEAN,
+                defaultValue:true,
+            },
+        },
+        {
+            sequelize,
+            modelName:"Library",
+            tableName:"Library",
+            timestamps:false,
+        },
+   );
+   return library;
+}
