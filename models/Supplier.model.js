@@ -1,0 +1,52 @@
+const {Model,DataTypes}=require('sequelize');
+module.exports=(sequelize)=>
+{
+    class Supplier extends Model{}
+    Supplier.init(
+        {
+            SupplierID:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:false,
+                primaryKey:true,
+                autoIncrement:true,
+            },
+            SupplierName:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Email:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+                unique:true,
+            },
+            Password:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            ContactNumber:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            Reset_Token:
+            {
+                type:DataTypes.STRING,
+            },
+            Reset_Token_Expiry:
+            {
+                type:DataTypes.DATE,
+            },
+        },
+        {
+            sequelize,
+            tableName:"Supplier",
+            modelName:"Supplier",
+            timestamps:false,
+        },
+    );
+    return Supplier;
+};
