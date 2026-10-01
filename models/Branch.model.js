@@ -1,0 +1,48 @@
+const {Model,DataTypes}=require('sequelize');
+module.exports=(sequelize)=>
+{
+    class Branch extends Model{};
+    Branch.init(
+        {
+            BranchID:
+            {
+                type:DataTypes.INTEGER,
+                primaryKey:true,
+                allowNull:false,
+                autoIncrement:true,
+            },
+            CityID:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:false,
+                references:
+                {
+                    model:"City",
+                    key:"CityID",
+                },
+            },
+            BranchName:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            BranchCode:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            IsActive:
+            {
+                type:DataTypes.BOOLEAN,
+                defaultValue:true,
+            },
+        },
+        {
+            sequelize,
+            modelName:"Branch",
+            tableName:"Branch",
+            timestamps:false,
+        },
+    );
+    return Branch;
+};

@@ -31,3 +31,28 @@ exports.create = async (req, res) => {
         });
     }
 };
+
+
+exports.getAll=async(req,res)=>
+{
+    try
+    {
+        const details=await Speciality.findAll();
+        if(details.length===0)
+        {
+            return res.status(400).json({
+                success: false,
+                message: "SpecialityName is required",
+            });
+        }
+        return res.status(201).json({
+            success: true,
+            count:details.length,
+            data: details,
+        });
+    }
+    catch(e)
+    {
+         return res.status(500).json({success: false,message: e.message});
+}
+}

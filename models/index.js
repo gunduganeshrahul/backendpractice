@@ -151,5 +151,46 @@ db.chef.hasMany(db.restaurant,
   },
 );
 
+db.company=require('../models/Company.model.js')(sequelize);
+db.state=require('../models/State.model.js')(sequelize);
+db.city=require('../models/City.model.js')(sequelize);
+db.branch=require('../models/Branch.model.js')(sequelize);
 
+db.state.belongsTo(db.company, {
+    foreignKey: "CompanyID"
+});
+
+db.company.hasMany(db.state, {
+    foreignKey: "CompanyID"
+});
+
+db.city.belongsTo(db.state, {
+    foreignKey: "StateID"
+});
+
+db.state.hasMany(db.city, {
+    foreignKey: "StateID"
+});
+
+db.branch.belongsTo(db.city, {
+    foreignKey: "CityID"
+});
+
+db.city.hasMany(db.branch, {
+    foreignKey: "CityID"
+});
+
+db.usermaster=require('../models/UserMaster.model.js')(sequelize);
+
+db.usermaster.belongsTo(db.branch,
+  {
+    foreignKey:"BranchID"
+  },
+);
+
+db.branch.hasMany(db.usermaster,
+  {
+    foreignKey:"BranchID"
+  },
+);
 module.exports = db;

@@ -93,6 +93,16 @@ require('./routes/MenuItem.route')(app);
 require('./routes/Chef.route')(app);
 //
 require("./routes/Speciality.routes")(app);
+//
+require("./routes/Company.route")(app);
+//
+require('./routes/State.route')(app);
+//
+require('./routes/City.routes')(app);
+//
+require('./routes/Branch.route')(app);
+//
+require('./routes/UserMaster.routes')(app);
 // ===============================
 // Database Connection
 // ===============================
@@ -103,7 +113,7 @@ db.sequelize
 
     console.log("PostgreSQL connected successfully");
 
-    return db.sequelize.sync();
+    return db.sequelize.sync({alter: true });
 
   })
   .then(() => {

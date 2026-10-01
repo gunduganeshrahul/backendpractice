@@ -1,0 +1,48 @@
+const {Model,DataTypes}=require('sequelize');
+module.exports=(sequelize)=>
+{
+    class City extends Model{};
+    City.init(
+        {
+            CityID:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:false,
+                autoIncrement:true,
+                primaryKey:true,
+            },
+            StateID:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:false,
+                references:
+                {
+                    model:"State",
+                    key:"StateID",
+                },
+            },
+            CityName:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            CityCode:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            IsActive:
+            {
+                type:DataTypes.BOOLEAN,
+                defaultValue:true,
+            },
+        },
+        {
+            sequelize,
+            modelName:"City",
+            tableName:"City",
+            timestamps:false,
+        },
+    );
+    return City;
+};

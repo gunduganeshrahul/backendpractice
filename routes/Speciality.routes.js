@@ -4,6 +4,8 @@ module.exports=(app)=>
     const routes=require('express').Router();
 
     routes.post("/",SpecialityController.create);
+    routes.get('/',SpecialityController.getAll);
 
     app.use('/api/speciality',routes);
+    
 };
