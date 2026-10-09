@@ -1,7 +1,7 @@
  const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('../models');
-const Admin = db.adminreg;
+const Admin = db.admin;
 
 exports.register = async (req, res) => {
   try {
