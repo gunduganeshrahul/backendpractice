@@ -1,0 +1,48 @@
+const {Model,DataTypes}=require('sequelize');
+module.exports=(sequelize)=>
+{
+    class Designation extends Model{}
+    Designation.init(
+        {
+            DesignationID:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:false,
+                autoIncrement:true,
+                primaryKey:true,
+            },
+            DepartmentID:
+            {
+                type:DataTypes.INTEGER,
+                allowNull:false,
+                references:
+                {
+                    model:"Department",
+                    key:"DepartmentID",
+                },
+            },
+            DesignationName:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            DesignationCode:
+            {
+                type:DataTypes.STRING,
+                allowNull:false,
+            },
+            IsActive:
+            {
+                type:DataTypes.BOOLEAN,
+                defaultValue:true,
+            },
+        },
+        {
+            sequelize,
+            modelName:"Designation",
+            tableName:"Designation",
+            timestamps:false,
+        },
+    );
+    return Designation;
+};

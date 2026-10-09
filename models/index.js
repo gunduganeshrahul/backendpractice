@@ -193,4 +193,27 @@ db.branch.hasMany(db.usermaster,
     foreignKey:"BranchID"
   },
 );
+
+db.department=require('../models/Department.model.js')(sequelize);
+db.designation=require('../models/Designation.model.js')(sequelize);
+db.candidate=require('../models/Candidate.model.js')(sequelize);
+
+ db.designation.belongsTo(db.department, {
+    foreignKey: "DepartmentID",
+});
+
+db.department.hasMany(db.designation, {
+    foreignKey: "DepartmentID",
+});
+
+
+// Designation → Candidate
+db.candidate.belongsTo(db.designation, {
+    foreignKey: "DesignationID",
+});
+
+db.designation.hasMany(db.candidate, {
+    foreignKey: "DesignationID",
+});
+
 module.exports = db;

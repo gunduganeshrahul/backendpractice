@@ -103,6 +103,9 @@ require('./routes/City.routes')(app);
 require('./routes/Branch.route')(app);
 //
 require('./routes/UserMaster.routes')(app);
+//
+require('./routes/Candidate.routes')(app);
+
 // ===============================
 // Database Connection
 // ===============================

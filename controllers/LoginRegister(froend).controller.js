@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const transporter = require('../config/mailer');
-const { DATE } = require("sequelize");
+
 
 exports.Register = async (req, res) => {
     try {
