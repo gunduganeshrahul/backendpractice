@@ -23,6 +23,7 @@
     "nodemailer": "^10.0.10",
     "pg": "^8.23.0",
     "pg-hstore": "^2.3.4",
+    "razorpay": "^2.9.8",
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
