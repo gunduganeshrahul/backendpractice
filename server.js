@@ -105,8 +105,6 @@ require('./routes/Branch.route')(app);
 require('./routes/UserMaster.routes')(app);
 //
 require('./routes/Candidate.routes')(app);
-//
-require('./routes/payment.routes')(app);
 
 // ===============================
 // Database Connection

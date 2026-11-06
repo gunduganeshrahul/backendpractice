@@ -216,6 +216,4 @@ db.designation.hasMany(db.candidate, {
     foreignKey: "DesignationID",
 });
 
-db.payment=require('../models/payment.model.js')(sequelize);
-
 module.exports = db;
